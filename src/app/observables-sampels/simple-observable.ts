@@ -1,5 +1,10 @@
 import { Observable } from "rxjs";
 
+/*          
+    1. Creation of observable
+    2. First invokation
+*/
+
 export default () => {
 
     const observable: Observable<string> = new Observable(observer => {
@@ -7,12 +12,10 @@ export default () => {
         observer.next('Hello from Observableland!');
     }, 1000);
 
-    // teardown
     return () => {
-        clearInterval(interval);
-    };
+            clearInterval(interval);
+        };
     });
 
     observable.subscribe(value => console.log(value));
-
 };
