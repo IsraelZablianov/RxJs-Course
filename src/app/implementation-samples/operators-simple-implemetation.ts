@@ -1,6 +1,11 @@
 import { SubscribeLogic } from "src/app/implementation-samples/observable-simple-implementation";
 import { ObserverHandlers, Observer } from "src/app/implementation-samples/observer-simple-implementation";
 
+/**
+ * An Operator is a function which creates a new Observable based on the current Observable. 
+ * This is a pure operation: the previous Observable stays unmodified ( http://reactivex.io/rxjs/manual/overview.html )
+ */
+
 export interface UnaryFunction<T, R> { (source: T): R; }
 
 export interface OperatorFunction<T, R> extends UnaryFunction<Observable<T>, Observable<R>> { }
