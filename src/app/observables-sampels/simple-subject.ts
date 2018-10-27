@@ -1,9 +1,7 @@
-import { of } from 'rxjs';
-import { Observable, Subject } from 'rxjs';
+import { of, Observable, Subject } from 'rxjs';
 
 /*          
     1. Subject has state, it keeps a list of observers. 
-    On the other hand, an Observable is really just a function that sets up observation.
 */
 
 export default () => {

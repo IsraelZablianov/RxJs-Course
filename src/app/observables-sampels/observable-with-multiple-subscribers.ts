@@ -1,5 +1,4 @@
-import { of } from 'rxjs';
-import { Observable } from 'rxjs';
+import { of, Observable } from 'rxjs';
 
 /*          
     1. Every subscription invokes the observable logic, new Observer instance is created
@@ -10,7 +9,7 @@ export default () => {
     const observable = new Observable(observer => {
         console.log("In observer logic ");
         setInterval(() => {
-            observer.next("Israel");
+            observer.next("Hello from Observableland!");
         }, 3000)
     });
 

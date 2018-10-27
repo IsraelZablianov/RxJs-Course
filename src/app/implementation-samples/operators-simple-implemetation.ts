@@ -1,5 +1,5 @@
-import { SubscribeLogic } from "src/app/implementation-samples/observable-simple-implementation";
-import { ObserverHandlers, Observer } from "src/app/implementation-samples/observer-simple-implementation";
+import { SubscribeLogic } from "../implementation-samples/observable-simple-implementation";
+import { ObserverHandlers, Observer } from "../implementation-samples/observer-simple-implementation";
 
 /**
  * An Operator is a function which creates a new Observable based on the current Observable. 
@@ -10,9 +10,11 @@ export interface UnaryFunction<T, R> { (source: T): R; }
 
 export interface OperatorFunction<T, R> extends UnaryFunction<Observable<T>, Observable<R>> { }
 
-/*  pipe implementaion 
+/**
+ * pipe implementaion
+ */
 
-*/
+ 
 export class Observable<T> {
     subscribeLogic: Function;
 
@@ -41,13 +43,13 @@ export class Observable<T> {
     }
 }
 
-export function pipeFromArray<T, R>(fns: Array<UnaryFunction<T, R>>): UnaryFunction<T, R> {
-    if (fns.length === 1) {
-        return fns[0];
+export function pipeFromArray<T, R>(functions: Array<UnaryFunction<T, R>>): UnaryFunction<T, R> {
+    if (functions.length === 1) {
+        return functions[0];
     }
 
     return function piped(input: T): R {
-        return fns.reduce((prev: any, fn: UnaryFunction<T, R>) => fn(prev), input as any);
+        return functions.reduce((prev: any, func: UnaryFunction<T, R>) => func(prev), input as any);
     }; 
 }
 
@@ -67,6 +69,28 @@ new Observable<T>(observer => {
         complete() { observer.complete(); }
     })
 });
+
+/**
+ * sample of map impemenation
+ * @param callback 
+ * 
+ */
+export function map<T,R>(callback: (value: T) => R): OperatorFunction<T, R> {
+    return (source: Observable<R>) =>
+        new Observable<T>(observer => {
+            return source.subscribe({
+                next(value) {
+                    if (callback) {
+                        const mappedValue = callback(value);
+                        observer.next(mappedValue);
+                    }
+                },
+                error(err) { observer.error(err); },
+                complete() { observer.complete(); }
+            })
+        });
+}
+
 
 
 /**
