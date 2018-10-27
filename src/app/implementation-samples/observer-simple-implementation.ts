@@ -1,7 +1,7 @@
 export interface ObserverHandlers {
-    next: Function;
-    error?: Function;
-    complete?: Function;
+    next: (value?: any) => void;
+    error?: (error?: any) => void;
+    complete?: () => void;
 }
 
 export class Observer {

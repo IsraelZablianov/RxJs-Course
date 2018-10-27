@@ -8,9 +8,6 @@ import { map, mergeMap, filter } from 'rxjs/operators';
 
 
 
-
-
-
 /**
  * fromEvent -> creates an observable of event, will be emitted after 'israel button' will be pressed 
  */
