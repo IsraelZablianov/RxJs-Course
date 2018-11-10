@@ -1,5 +1,5 @@
-import { SubscribeLogic } from "../implementation-samples/observable-simple-implementation";
-import { ObserverHandlers, Observer } from "../implementation-samples/observer-simple-implementation";
+import { SubscribeLogic } from "../implementation-exampels/observable-simple-implementation";
+import { ObserverHandlers, Observer } from "../implementation-exampels/observer-simple-implementation";
 
 /**
  * An Operator is a function which creates a new Observable based on the current Observable. 

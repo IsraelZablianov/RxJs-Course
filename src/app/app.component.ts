@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { OnInit } from "@angular/core";
 import htmlLogger from "./html-logger";
 
-import SimpleObservable from "./observables-sampels/simple-observable";
-import ObservableWithMultipleSubscribers from "./observables-sampels/observable-with-multiple-subscribers";
-import SimpleSubject from "./observables-sampels/simple-subject";
+import SimpleObservable from "./observables-exampels/simple-observable";
+import ObservableWithMultipleSubscribers from "./observables-exampels/observable-with-multiple-subscribers";
+import SimpleSubject from "./observables-exampels/simple-subject";
 
 /* 
                       Online Editor

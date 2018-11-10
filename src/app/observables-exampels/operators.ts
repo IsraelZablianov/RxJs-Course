@@ -2,7 +2,7 @@ import { fromEvent, from, of } from "rxjs";
 import { map, mergeMap, filter } from 'rxjs/operators';
 /**
  * There are many operators and every operator is important.
- * I will list the most popular and important to remember as they come frequently in use and samples
+ * I will list the most popular and important to remember as they come frequently in use and exampels
  * the sampels are taken from learn-rxjs - https://www.learnrxjs.io
  */
 
