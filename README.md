@@ -1,27 +1,42 @@
 # RxjsExample
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
+In this course we will present a simple implementation of RxJS `Observable`, `Subject` and `Pipe` method of Observable. <br />
 
-## Development server
+The presentation of this course is [RxJS.pptx](RxJS.pptx) <br />
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Code Examples
 
-## Code scaffolding
+Under `src` folder you will find 2 inner folders `implementation` and `usage` <br />
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Under `implementation` folder, you will find a simple implementation of the core classes and structures that `RxJS` uses. <br />
 
-## Build
+For example:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+`Observable`
+```ts
+import { Observer, ObserverHandlers } from "./observer";
 
-## Running unit tests
+export type SubscribeLogic = (observer: Observer) => any;
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+export class Observable {
+    subscribeLogic: Function;
 
-## Running end-to-end tests
+    constructor(subscribeLogic: SubscribeLogic) {
+        this.subscribeLogic = subscribeLogic;
+    }
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+    subscribe(observerHandlers: ObserverHandlers) {
+        const observer = new Observer(observerHandlers);
+        const unsubscribeLogic = this.subscribeLogic(observer);
+        observer.unsubscribeLogic = unsubscribeLogic;
 
-## Further help
+        return {
+            unsubscribe() {
+                observer.unsubscribe();
+            }
+        };
+    }
+}
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Under `usage` folder, you will find examples of how to use `Rxjs` `Observable`, `Subject` and `Operatos`. <br />
