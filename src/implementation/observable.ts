@@ -1,4 +1,4 @@
-import { Observer, ObserverHandlers } from "./observer-simple-implementation";
+import { Observer, ObserverHandlers } from "./observer";
 
 export type SubscribeLogic = (observer: Observer) => any;
 

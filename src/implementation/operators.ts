@@ -1,5 +1,5 @@
-import { SubscribeLogic } from "../implementation-exampels/observable-simple-implementation";
-import { ObserverHandlers, Observer } from "../implementation-exampels/observer-simple-implementation";
+import { SubscribeLogic } from "./observable";
+import { ObserverHandlers, Observer } from "./observer";
 
 /**
  * An Operator is a function which creates a new Observable based on the current Observable. 
@@ -14,7 +14,7 @@ export interface OperatorFunction<T, R> extends UnaryFunction<Observable<T>, Obs
  * pipe implementaion
  */
 
- 
+
 export class Observable<T> {
     subscribeLogic: Function;
 
@@ -50,7 +50,7 @@ export function pipeFromArray<T, R>(functions: Array<UnaryFunction<T, R>>): Unar
 
     return function piped(input: T): R {
         return functions.reduce((prev: any, func: UnaryFunction<T, R>) => func(prev), input as any);
-    }; 
+    };
 }
 
 /*
@@ -60,22 +60,22 @@ export function pipeFromArray<T, R>(functions: Array<UnaryFunction<T, R>>): Unar
 */
 
 const takeEveryDividedNth = (n: number) => <T>(source: Observable<T>) =>
-new Observable<T>(observer => {
-    return source.subscribe({
-        next(value) {
-            if (value % n === 0) observer.next(value);
-        },
-        error(err) { observer.error(err); },
-        complete() { observer.complete(); }
-    })
-});
+    new Observable<T>(observer => {
+        return source.subscribe({
+            next(value) {
+                if (value % n === 0) observer.next(value);
+            },
+            error(err) { observer.error(err); },
+            complete() { observer.complete(); }
+        })
+    });
 
 /**
  * sample of map impemenation
  * @param callback 
  * 
  */
-export function map<T,R>(callback: (value: T) => R): OperatorFunction<T, R> {
+export function map<T, R>(callback: (value: T) => R): OperatorFunction<T, R> {
     return (source: Observable<R>) =>
         new Observable<T>(observer => {
             return source.subscribe({
@@ -98,7 +98,7 @@ export function map<T,R>(callback: (value: T) => R): OperatorFunction<T, R> {
 */
 
 const observable = new Observable(observer => {
-    [1,2,3,4,5].forEach((value) => observer.next(value));
+    [1, 2, 3, 4, 5].forEach((value) => observer.next(value));
 });
 
 const pipedSample = observable.pipe(takeEveryDividedNth(2), takeEveryDividedNth(4));
